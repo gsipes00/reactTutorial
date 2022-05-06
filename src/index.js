@@ -1,38 +1,58 @@
 import React from "react";
 import ReactDom from "react-dom";
-
-// css
 import "./index.css";
+
+// variables
+const firstBook = {
+  img: "https://imgs.search.brave.com/IIQW_a0eTwHXxFEBUInufV40aGMiwOxmPoY2hRwW43s/rs:fit:568:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5r/VWpuaWM1WDE4Q1Vh/MXM2X0JIVHZnSGFH/TCZwaWQ9QXBp",
+  title: "Crypto 101",
+  author: "Charles Hoskinson",
+};
+
+const secondBook = {
+  img: "https://imgs.search.brave.com/Zr4zRskQAxjlywc42Vsx3oC0Vtlgt61HDk2cOg7PA7E/rs:fit:713:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC53/SlR3Z3c2SVdHYVJw/b25FdmE4bUR3SGFF/NyZwaWQ9QXBp",
+  title: "I love React",
+  author: "McLovin",
+};
 
 function Booklist() {
   return (
     <section className='booklist'>
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
+      <Book
+        img={firstBook.img}
+        title={firstBook.title}
+        author={firstBook.author}
+      />
+      <Book
+        img={secondBook.img}
+        title={secondBook.title}
+        author={secondBook.author}
+      />
     </section>
   );
 }
-
-const Book = () => {
+// Book component (can destructure the props directly in the parameters)
+const Book = ({ img, title, author }) => {
+  // const { img, title, author } = props;
   return (
     <article className='book'>
-      <Image />
-      <Title />
-      <Author />
+      <img src={img} alt='of a book' />
+      <h1>{title}</h1>
+      <h4>{author}</h4>
     </article>
   );
 };
-const Image = () => (
-  <img src='https://imgs.search.brave.com/IIQW_a0eTwHXxFEBUInufV40aGMiwOxmPoY2hRwW43s/rs:fit:568:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5r/VWpuaWM1WDE4Q1Vh/MXM2X0JIVHZnSGFH/TCZwaWQ9QXBp' />
-);
-const Title = () => <h1>curl up with a good book.</h1>;
-
-const Author = () => <h4>-Johnny B Goode</h4>;
+// // secondBook component
+// const Secondbook = (props) => {
+//   console.log(props);
+//   return (
+//     <article className='book'>
+//       <img src={props.img} alt='of a book' />
+//       <h1>{props.title}</h1>
+//       <h4>{props.author}</h4>
+//     </article>
+//   );
+// };
 
 ReactDom.render(<Booklist />, document.getElementById("root"));
 
