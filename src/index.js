@@ -3,56 +3,54 @@ import ReactDom from "react-dom";
 import "./index.css";
 
 // variables
-const firstBook = {
-  img: "https://imgs.search.brave.com/IIQW_a0eTwHXxFEBUInufV40aGMiwOxmPoY2hRwW43s/rs:fit:568:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5r/VWpuaWM1WDE4Q1Vh/MXM2X0JIVHZnSGFH/TCZwaWQ9QXBp",
-  title: "Crypto 101",
-  author: "Charles Hoskinson",
-};
+const books = [
+  {
+    id: 1,
+    img: "https://imgs.search.brave.com/IIQW_a0eTwHXxFEBUInufV40aGMiwOxmPoY2hRwW43s/rs:fit:568:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5r/VWpuaWM1WDE4Q1Vh/MXM2X0JIVHZnSGFH/TCZwaWQ9QXBp",
+    title: "Crypto 101",
+    author: "Charles Hoskinson",
+    date: "1/1/2002",
+  },
 
-const secondBook = {
-  img: "https://imgs.search.brave.com/Zr4zRskQAxjlywc42Vsx3oC0Vtlgt61HDk2cOg7PA7E/rs:fit:713:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC53/SlR3Z3c2SVdHYVJw/b25FdmE4bUR3SGFF/NyZwaWQ9QXBp",
-  title: "I love React",
-  author: "McLovin",
-};
+  {
+    id: 2,
+    img: "https://imgs.search.brave.com/Zr4zRskQAxjlywc42Vsx3oC0Vtlgt61HDk2cOg7PA7E/rs:fit:713:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC53/SlR3Z3c2SVdHYVJw/b25FdmE4bUR3SGFF/NyZwaWQ9QXBp",
+    title: "I love React",
+    author: "McLovin",
+    date: "5/15/2021",
+  },
+];
 
 function Booklist() {
   return (
     <section className='booklist'>
-      <Book
-        img={firstBook.img}
-        title={firstBook.title}
-        author={firstBook.author}
-      />
-      <Book
-        img={secondBook.img}
-        title={secondBook.title}
-        author={secondBook.author}
-      />
+      {books.map((book) => {
+        const { img, title, author } = book;
+        return <Book key={book.id} {...book} />;
+      })}
     </section>
   );
 }
 // Book component (can destructure the props directly in the parameters)
-const Book = ({ img, title, author }) => {
-  // const { img, title, author } = props;
+const Book = (props) => {
+  const { img, title, author, date } = props;
+  // attribute, eventHandler
+  // on click, onMouseOver
+  const clickHandler = () => {
+    alert(title, date);
+  };
   return (
     <article className='book'>
       <img src={img} alt='of a book' />
       <h1>{title}</h1>
       <h4>{author}</h4>
+      <button type='button' onClick={clickHandler}>
+        reference exmaple
+      </button>
+      <p>{date}</p>
     </article>
   );
 };
-// // secondBook component
-// const Secondbook = (props) => {
-//   console.log(props);
-//   return (
-//     <article className='book'>
-//       <img src={props.img} alt='of a book' />
-//       <h1>{props.title}</h1>
-//       <h4>{props.author}</h4>
-//     </article>
-//   );
-// };
 
 ReactDom.render(<Booklist />, document.getElementById("root"));
 
